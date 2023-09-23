@@ -12,6 +12,8 @@ A repository with a service for managing users. This repository is part of Micro
     - /internal
         - /transport
         - /service
+- /.dapr
+- /assets
 
 ### Service architecture
 This section describes architecture of this particular service and not the entire system.

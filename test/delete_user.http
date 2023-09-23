@@ -1,0 +1,4 @@
+@hostname=localhost
+@port=8080
+
+DELETE http://{{hostname}}:{{port}}/users HTTP/1.1
