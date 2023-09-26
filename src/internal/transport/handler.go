@@ -3,6 +3,7 @@ package transport
 import (
 	"net/http"
 	"user-service/internal/transport/model"
+	"user-service/internal/transport/util"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -25,6 +26,8 @@ func Initalize(port int, services *model.ServiceCollection) *Handler {
 
 	// Protected routes
 	handler.Mux.Group(func(r chi.Router) {
+		r.Use(util.ParseJWT())
+
 		r.Route("/users", func(r chi.Router) {
 			r.Delete("/", handler.DeleteUser)
 		})

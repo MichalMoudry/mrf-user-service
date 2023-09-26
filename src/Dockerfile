@@ -12,6 +12,6 @@ WORKDIR /user-service
 COPY /cmd/config.json .
 COPY --from=build /build ./build
 
-EXPOSE 8080
+EXPOSE 8085
 
 ENTRYPOINT [ "/user-service/build" ]

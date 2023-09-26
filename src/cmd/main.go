@@ -10,7 +10,7 @@ import (
 	"user-service/internal/transport/model"
 
 	firebase "firebase.google.com/go/v4"
-	dapr "github.com/dapr/go-sdk/client"
+	//dapr "github.com/dapr/go-sdk/client"
 )
 
 func main() {
@@ -20,6 +20,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Firebase init
 	firebaseApp, err := firebase.NewApp(context.Background(), config.GetFirebaseConfig())
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
@@ -29,18 +30,20 @@ func main() {
 		log.Printf("error initializing firebase auth:\n%v\n", err)
 	}
 
-	var daprClient dapr.Client
+	// Dapr init
+	/*var daprClient dapr.Client
 	if cfg.RunWithDapr {
 		daprClient, err = dapr.NewClient()
 		if err != nil {
 			log.Fatal(err)
 		}
 		defer daprClient.Close()
-	}
+	}*/
 
+	// Web server init
 	handler := transport.Initalize(
 		cfg.Port,
-		model.NewServiceCollection(daprClient, firebaseAuth),
+		model.NewServiceCollection(nil, firebaseAuth),
 	)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", handler.Port), handler.Mux)
 	if err != nil {
