@@ -24,12 +24,13 @@ func NewUserService(dapr dapr.Client, fbAuth *auth.Client) UserService {
 
 // Method for deleting a user in the system.
 func (srvc UserService) DeleteUser(ctx context.Context, userId string) error {
-	err := srvc.FirebaseAuth.DeleteUser(ctx, userId)
+	srvc.FirebaseAuth.VerifyIDToken(ctx, userId)
+	/*err := srvc.FirebaseAuth.DeleteUser(ctx, userId)
 	if err != nil {
 		return err
-	}
+	}*/
 
-	err = srvc.Dapr.PublishEvent(ctx, "mrf-pub-sub", "user-delete", userId)
+	err := srvc.Dapr.PublishEvent(ctx, "mrf-pub-sub", "user-delete", userId)
 	if err != nil {
 		return err
 	}
