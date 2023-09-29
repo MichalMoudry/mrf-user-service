@@ -11,9 +11,12 @@ import (
 
 	firebase "firebase.google.com/go/v4"
 	dapr "github.com/dapr/go-sdk/client"
+	"google.golang.org/api/option"
 )
 
 func main() {
+	log.Println("Hello from user service! ʕ•ᴥ•ʔ")
+
 	// Read app's config
 	cfg, err := config.ReadCfgFromFile("config.json")
 	if err != nil {
@@ -21,7 +24,8 @@ func main() {
 	}
 
 	// Firebase init
-	firebaseApp, err := firebase.NewApp(context.Background(), config.GetFirebaseConfig())
+	option := option.WithCredentialsFile("./service-acc.json")
+	firebaseApp, err := firebase.NewApp(context.Background(), config.GetFirebaseConfig(), option)
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
 	}

@@ -2,6 +2,7 @@ package transport
 
 import (
 	"net/http"
+	srvc_middleware "user-service/internal/transport/middleware"
 	"user-service/internal/transport/model"
 
 	"firebase.google.com/go/v4/auth"
@@ -26,6 +27,8 @@ func Initalize(port int, services *model.ServiceCollection, auth *auth.Client) *
 
 	// Protected routes
 	handler.Mux.Group(func(r chi.Router) {
+		r.Use(srvc_middleware.Authenticate(auth))
+
 		r.Route("/users", func(r chi.Router) {
 			r.Delete("/", handler.DeleteUser)
 		})
