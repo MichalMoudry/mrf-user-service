@@ -4,7 +4,7 @@
 
 
 # User service
-A repository with a service for managing users. This repository is part of Microservice Reference Framework.
+A repository with a service for managing users. This repository is part of Microservices Reference Framework.
 
 ## Project structure
 - /src
