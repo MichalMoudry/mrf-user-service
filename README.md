@@ -1,10 +1,10 @@
 <p align="center">
-    <img src="./assets/mrf_logo.svg" alt="Microservice Reference Framework logo" />
+    <img src="./assets/mrf_logo.svg" alt="Microservices Reference Framework logo" />
 </p>
 
 
 # User service
-A repository with a service for managing users. This repository is part of Microservice Reference Framework.
+A repository with a service for managing users. This repository is part of Microservices Reference Framework.
 
 ## Project structure
 - /src
@@ -12,6 +12,8 @@ A repository with a service for managing users. This repository is part of Micro
     - /internal
         - /transport
         - /service
+- /.dapr
+- /assets
 
 ### Service architecture
 This section describes architecture of this particular service and not the entire system.
