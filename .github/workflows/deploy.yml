@@ -59,7 +59,7 @@ jobs:
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          imageToDeploy: docker.io/michalmoudry/user-service:latest
+          imageToDeploy: docker.io/michalmoudry/user-service:deployment-update
           resourceGroup: microservice-reference-framework
           containerAppEnvironment: microservice-ref-framework-env
           containerAppName: user-service
