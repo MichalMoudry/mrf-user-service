@@ -49,9 +49,9 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}/src
-          registryUrl: docker.io/michalmoudry/user-service
-          registryUsername: ${{ secrets.REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.REGISTRY_PASSWORD }}
-          yamlConfigPath: .azure/app_config.yml
+          imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: microservice-reference-framework
+          containerAppEnvironment: microservice-ref-framework-env
+          containerAppName: user-service
+          targetPort: 8085
+          yamlConfigPath: .azure/app_config.yml
