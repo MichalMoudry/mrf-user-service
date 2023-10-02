@@ -45,7 +45,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Build and deploy Container App
+      - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
@@ -53,4 +53,4 @@ jobs:
           containerAppEnvironment: microservice-ref-framework-env
           containerAppName: user-service
           targetPort: 8085
-          yamlConfigPath: .azure/app_config.yml
+          yamlConfigPath: ./infrastructure/app_config.yml
