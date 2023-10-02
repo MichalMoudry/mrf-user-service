@@ -54,7 +54,7 @@ jobs:
         with:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: microservice-reference-framework
-          containerAppEnvironment: microservice-ref-framework-env
+          containerAppEnvironment: microservice-reference-framework-env
           containerAppName: user-service
           targetPort: 8085
           yamlConfigPath: ./.azure/app_config.yml
