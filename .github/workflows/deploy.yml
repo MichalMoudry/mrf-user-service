@@ -56,13 +56,6 @@ jobs:
           replace: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           regex: false
 
-      - name: Update app config filw with Firebase info
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: "[firebase_creds]"
-          replace: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          regex: false
-
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
@@ -72,3 +65,5 @@ jobs:
           containerAppName: user-service
           targetPort: 8085
           yamlConfigPath: ./.azure/app_config.yml
+          environmentVariables:
+            FB_TYPE=${{ secrets.FIREBASE_TYPE }} FB_PRIV_KEY_ID=${{ secrets.FIREBASE_PRIV_KEY_ID }} FB_PRIV_KEY=${{ secrets.FIREBASE_PRIV_KEY }} FB_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} FB_CLIENT_ID=${{ secrets.FIREBASE_CLIENT_ID }} FB_AUTH_URI=${{ secrets.FIREBASE_AUTH_URI }} FB_TOKEN_URI=${{ secrets.FIREBASE_TOKEN_URI }} FB_CLIENT_CERT_URL=${{ secrets.FIREBASE_CLIENT_CERT_URL }}
