@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	PUBSUB = "mrf-pub-sub"
+	PUBSUB = "mrf_pub_sub"
 )
 
 // A wrapper service for a Dapr client.
