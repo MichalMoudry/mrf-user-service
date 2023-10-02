@@ -9,7 +9,6 @@ jobs:
     name: Push Docker image
     runs-on: ubuntu-latest
     #environment: Azure
-    if: false
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -37,7 +36,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    #needs: [push_to_registery]
+    needs: [push_to_registery]
     #environment: Azure
     steps:
       - name: Check out the repo
@@ -49,7 +48,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Update app config file with subscription ID
+      - name: Update app config file
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "[subscription_id]"
@@ -65,5 +64,3 @@ jobs:
           containerAppName: user-service
           targetPort: 8085
           yamlConfigPath: ./.azure/app_config.yml
-          #environmentVariables:
-            #FB_TYPE=${{ secrets.FIREBASE_TYPE }} FB_PRIV_KEY_ID=${{ secrets.FIREBASE_PRIV_KEY_ID }} FB_PRIV_KEY=${{ secrets.FIREBASE_PRIV_KEY }} FB_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} FB_CLIENT_ID=${{ secrets.FIREBASE_CLIENT_ID }} FB_AUTH_URI=${{ secrets.FIREBASE_AUTH_URI }} FB_TOKEN_URI=${{ secrets.FIREBASE_TOKEN_URI }} FB_CLIENT_CERT_URL=${{ secrets.FIREBASE_CLIENT_CERT_URL }}
