@@ -17,7 +17,7 @@ A repository with a service for managing users. This repository is part of Micro
         - /service
         - /config
 - /.dapr
-- /infrastructure
+- /.azure
 - /assets
 
 ### Service architecture

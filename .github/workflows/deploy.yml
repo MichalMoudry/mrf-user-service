@@ -9,10 +9,10 @@ jobs:
     name: Push Docker image
     runs-on: ubuntu-latest
     #environment: Azure
-    #if: false
+    if: false
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -40,6 +40,9 @@ jobs:
     needs: [push_to_registery]
     #environment: Azure
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
       # https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux
       - name: Log in to Azure
         uses: azure/login@v1
@@ -54,4 +57,4 @@ jobs:
           containerAppEnvironment: microservice-ref-framework-env
           containerAppName: user-service
           targetPort: 8085
-          yamlConfigPath: ./infrastructure/app_config.yml
+          yamlConfigPath: ./.azure/app_config.yml
