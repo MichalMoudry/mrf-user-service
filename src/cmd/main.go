@@ -24,8 +24,11 @@ func main() {
 	}
 
 	// Firebase init
-	option := option.WithCredentialsFile("./service-acc.json")
-	firebaseApp, err := firebase.NewApp(context.Background(), config.GetFirebaseConfig(), option)
+	firebaseApp, err := firebase.NewApp(
+		context.Background(),
+		config.GetFirebaseConfig(),
+		option.WithCredentialsJSON([]byte(cfg.FirbaseCreds)),
+	)
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
 	}
