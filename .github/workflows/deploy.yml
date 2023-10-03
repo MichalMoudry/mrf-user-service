@@ -64,3 +64,5 @@ jobs:
           containerAppName: user-service
           targetPort: 8085
           yamlConfigPath: ./.azure/app_config.yml
+          environmentVariables:
+            TEST_VAR=TEST_VAL
