@@ -64,4 +64,4 @@ jobs:
           containerAppName: user-service
           targetPort: 8085
           environmentVariables:
-            FIREBASE_CREDS=${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+            FIREBASE_CREDS=TESTVAL
