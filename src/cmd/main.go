@@ -24,14 +24,10 @@ func main() {
 	}
 
 	// Firebase init
-	firebaseCredentials, err := config.CreateFirebaseCredentials()
-	if err != nil {
-		log.Fatal(err)
-	}
 	firebaseApp, err := firebase.NewApp(
 		context.Background(),
 		config.GetFirebaseConfig(),
-		option.WithCredentialsJSON(firebaseCredentials),
+		option.WithCredentialsJSON(nil),
 	)
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
