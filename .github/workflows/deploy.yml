@@ -9,6 +9,7 @@ jobs:
     name: Push Docker image
     runs-on: ubuntu-latest
     environment: Azure
+    if: false
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: [push_to_registery]
+    #needs: [push_to_registery]
     environment: Azure
     steps:
       - name: Check out the repo
@@ -65,5 +66,5 @@ jobs:
           targetPort: 8085
           ingress: external
           environmentVariables:
-            FB_TYPE="${{ secrets.FB_TYPE }}" FB_PRIV_KEY_ID="${{ secrets.FB_PRIV_KEY_ID }}"
+            FB_TYPE="${{ secrets.FB_TYPE }}" FB_PRIV_KEY_ID="${{ secrets.FB_PRIV_KEY_ID }}" FB_PRIV_KEY="${{ secrets.FB_PRIV_KEY }}" FB_CLIENT_EMAIL="${{ secrets.FB_CLIENT_EMAIL }}" FB_CLIENT_ID="${{ secrets.FB_CLIENT_ID }}" FB_AUTH_URI="${{ secrets.FB_AUTH_URI }}" FB_TOKEN_URI="${{ secrets.FB_TOKEN_URI }}" FB_CLIENT_CERT_URL="${{ secrets.FB_CLIENT_CERT_URL }}"
 #          yamlConfigPath: ./.azure/app_config.yml
