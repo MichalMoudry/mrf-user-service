@@ -27,7 +27,7 @@ func main() {
 	firebaseApp, err := firebase.NewApp(
 		context.Background(),
 		config.GetFirebaseConfig(),
-		option.WithCredentialsJSON(nil),
+		option.WithCredentialsJSON([]byte(cfg.FirbaseCreds)),
 	)
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
