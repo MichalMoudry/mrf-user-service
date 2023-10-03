@@ -8,7 +8,6 @@ jobs:
   push_to_registery:
     name: Push Docker image
     runs-on: ubuntu-latest
-    if: false
     environment: Azure
     steps:
       - name: Check out the repo
@@ -37,7 +36,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    #needs: [push_to_registery]
+    needs: [push_to_registery]
     environment: Azure
     steps:
       - name: Check out the repo
@@ -66,5 +65,5 @@ jobs:
           targetPort: 8085
           ingress: external
           environmentVariables:
-            FIREBASE_CREDS=${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+            FB_TYPE="${{ secrets.FB_TYPE }}" FB_PRIV_KEY_ID="${{ secrets.FB_PRIV_KEY_ID }}"
 #          yamlConfigPath: ./.azure/app_config.yml
