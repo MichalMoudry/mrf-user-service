@@ -64,5 +64,7 @@ jobs:
           containerAppEnvironment: microservice-ref-framework-env
           containerAppName: user-service
           targetPort: 8085
+          ingress: external
+          yamlConfigPath: /.azure/app_config.yml
           environmentVariables:
-            FIREBASE_CREDS=TESTVAL
+            FIREBASE_CREDS=${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
