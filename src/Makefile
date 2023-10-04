@@ -9,3 +9,11 @@ yml_create:
 		-g microservice-reference-framework \
 		-n test-service-1 \
 		--yaml ../.azure/app_config.yml
+
+enable_dapr:
+	az containerapp dapr enable \
+		-n test-service-1 \
+		-g microservice-reference-framework \
+		--dapr-app-id userservice \
+		--dapr-app-protocol http \
+		--dapr-app-port 8085
