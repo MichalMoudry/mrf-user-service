@@ -78,7 +78,6 @@ jobs:
 
           echo "          - name: FB_CLIENT_CERT_URL" >> ./.azure/app_template.yml
           echo "            value: ${{ secrets.FB_CLIENT_CERT_URL }}" >> ./.azure/app_template.yml
-          cat ./.azure/app_template.yml
 
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
