@@ -55,7 +55,7 @@ jobs:
           find: "[subscription_id]"
           replace: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Update FB_TYPE env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
@@ -63,7 +63,7 @@ jobs:
           find: "[FB_TYPE]"
           replace: ${{ secrets.FB_TYPE }}
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Update FB_PRIV_KEY_ID env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
@@ -71,7 +71,7 @@ jobs:
           find: "[FB_PRIV_KEY_ID]"
           replace: ${{ secrets.FB_PRIV_KEY_ID }}
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Update PRIVATE_KEY env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
@@ -81,7 +81,7 @@ jobs:
           find: "[PRIVATE_KEY]"
           replace: $PRIVATE_KEY
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Update FB_CLIENT_EMAIL env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
@@ -89,7 +89,7 @@ jobs:
           find: "[FB_CLIENT_EMAIL]"
           replace: ${{ secrets.FB_CLIENT_EMAIL }}
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Update FB_CLIENT_ID env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
@@ -97,7 +97,7 @@ jobs:
           find: "[FB_CLIENT_ID]"
           replace: ${{ secrets.FB_CLIENT_ID }}
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Update FB_CLIENT_CERT_URL env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
@@ -105,7 +105,7 @@ jobs:
           find: "[FB_CLIENT_CERT_URL]"
           replace: ${{ secrets.FB_CLIENT_CERT_URL }}
           regex: false
-          include: ./.azure/app_config.yml
+          include: "**app_config.yml"
 
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
