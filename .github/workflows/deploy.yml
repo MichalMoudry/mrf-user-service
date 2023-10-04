@@ -64,7 +64,7 @@ jobs:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
           containerAppEnvironment: microservice-ref-framework-env
-          containerAppName: user-service
+          containerAppName: user-service-2
           targetPort: 8085
           ingress: external
           yamlConfigPath: ./.azure/app_config.yml
