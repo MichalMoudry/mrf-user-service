@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: mrf-pub-sub
+  name: mrf_pub_sub
 spec:
   type: pubsub.redis
   version: v1

@@ -18,14 +18,22 @@ func main() {
 	log.Println("Hello from user service! ʕ•ᴥ•ʔ")
 
 	// Read app's config
-	cfg, err := config.ReadCfgFromFile("config.json")
+	cfg, err := config.ReadCfgFromFile("config.toml")
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Printf("App is running in '%v' mode.\n", cfg.Environment)
 
 	// Firebase init
-	option := option.WithCredentialsFile("./service-acc.json")
-	firebaseApp, err := firebase.NewApp(context.Background(), config.GetFirebaseConfig(), option)
+	firebaseCredentials, err := config.CreateFirebaseCredentials()
+	if err != nil {
+		log.Fatal(err)
+	}
+	firebaseApp, err := firebase.NewApp(
+		context.Background(),
+		config.GetFirebaseConfig(),
+		option.WithCredentialsJSON(firebaseCredentials),
+	)
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
 	}

@@ -6,6 +6,9 @@
 # User service
 A repository with a service for managing users. This repository is part of Microservices Reference Framework.
 
+[![Build and test project](https://github.com/MichalMoudry/mrf-user-service/actions/workflows/go.yml/badge.svg)](https://github.com/MichalMoudry/mrf-user-service/actions/workflows/go.yml)
+[![Deploy to Azure](https://github.com/MichalMoudry/mrf-user-service/actions/workflows/deploy.yml/badge.svg)](https://github.com/MichalMoudry/mrf-user-service/actions/workflows/deploy.yml)
+
 ## Project structure
 - /src
     - /cmd

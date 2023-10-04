@@ -4,8 +4,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+// App's general configuration.
 type Config struct {
-	Port        int
+	Port int
+	Environment
 	RunWithDapr bool
 }
 
@@ -18,6 +20,7 @@ func ReadCfgFromFile(path string) (Config, error) {
 
 	return Config{
 		Port:        viper.GetInt("port"),
+		Environment: Environment(viper.GetString("environment")),
 		RunWithDapr: viper.GetBool("run_with_dapr"),
 	}, nil
 }
