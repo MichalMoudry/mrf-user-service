@@ -64,11 +64,9 @@ jobs:
           echo "private_key_id = ${{ secrets.FB_PRIV_KEY_ID }}" >> ./src/config.toml
           echo "private_key = ${{ secrets.FB_PRIV_KEY }}" >> ./src/config.toml
           echo "client_email = ${{ secrets.FB_CLIENT_EMAIL }}" >> ./src/config.toml
-          cat ./src/config.toml
 
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
-        if: false # TODO: Remove
         with:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
@@ -80,7 +78,6 @@ jobs:
 
       - name: Enable dapr for a Container App
         uses: azure/CLI@v1
-        if: false # TODO: Remove
         with:
           inlineScript: |
             az containerapp dapr enable \
