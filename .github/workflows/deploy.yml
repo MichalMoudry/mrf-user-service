@@ -79,8 +79,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         with:
           find: "[PRIVATE_KEY]"
-          replace:
-            '${{ env.FB_PRIV_KEY }}'
+          replace: "$PRIVATE_KEY"
           regex: false
           include: "**app_config.yml"
 
