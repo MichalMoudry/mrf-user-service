@@ -75,9 +75,11 @@ jobs:
 
       - name: Update PRIVATE_KEY env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
+        env:
+          PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         with:
           find: "[PRIVATE_KEY]"
-          replace: ${{ secrets.PRIVATE_KEY }}
+          replace: $PRIVATE_KEY
           regex: false
           include: ./.azure/app_config.yml
 
