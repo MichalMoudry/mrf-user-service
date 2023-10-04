@@ -8,8 +8,7 @@ jobs:
   push_to_registery:
     name: Push Docker image
     runs-on: ubuntu-latest
-    environment: Azure
-    if: false
+    #environment: Azure
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -19,6 +18,14 @@ jobs:
         with:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Add Firebase config to app's general configurion
+        run: |
+          echo "[firebase.config]" >> ./src/config.toml
+          echo "type = ${{ secrets.FB_TYPE }}" >> ./src/config.toml
+          echo "private_key_id = ${{ secrets.FB_PRIV_KEY_ID }}" >> ./src/config.toml
+          echo "private_key = ${{ secrets.FB_PRIV_KEY }}" >> ./src/config.toml
+          echo "client_email = ${{ secrets.FB_CLIENT_EMAIL }}" >> ./src/config.toml
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -37,7 +44,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    #needs: [push_to_registery]
+    needs: [push_to_registery]
     #environment: Azure
     steps:
       - name: Check out the repo
@@ -57,14 +64,6 @@ jobs:
           regex: false
           include: "**app_config.yml"
 
-      - name: Add Firebase config to app's general configurion
-        run: |
-          echo "[firebase.config]" >> ./src/config.toml
-          echo "type = ${{ secrets.FB_TYPE }}" >> ./src/config.toml
-          echo "private_key_id = ${{ secrets.FB_PRIV_KEY_ID }}" >> ./src/config.toml
-          echo "private_key = ${{ secrets.FB_PRIV_KEY }}" >> ./src/config.toml
-          echo "client_email = ${{ secrets.FB_CLIENT_EMAIL }}" >> ./src/config.toml
-
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
@@ -75,6 +74,8 @@ jobs:
           targetPort: 8085
           ingress: external
           yamlConfigPath: ./.azure/app_config.yml
+          environmentVariables:
+            TEST=TEMP
 
       - name: Enable dapr for a Container App
         uses: azure/CLI@v1
