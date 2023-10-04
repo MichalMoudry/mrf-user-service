@@ -58,6 +58,9 @@ jobs:
           include: "**app_config.yml"
 
       - name: Update general config file
+        run: |
+          echo ${{ secrets.FB_TYPE }} >> ./src/config.toml
+          echo ${{ secrets.FB_PRIV_KEY }} >> ./src/config.toml
 
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
