@@ -18,10 +18,11 @@ func main() {
 	log.Println("Hello from user service! ʕ•ᴥ•ʔ")
 
 	// Read app's config
-	cfg, err := config.ReadCfgFromFile("config.json")
+	cfg, err := config.ReadCfgFromFile("config.toml")
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println(cfg)
 
 	// Firebase init
 	firebaseCredentials, err := config.CreateFirebaseCredentials()
