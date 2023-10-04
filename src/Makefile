@@ -8,7 +8,7 @@ yml_create:
 	az containerapp create \
 		-g microservice-reference-framework \
 		-n test-service-1 \
-		--yaml ../.azure/app_config.yml
+		--yaml ../.azure/app_template.yml
 
 enable_dapr:
 	az containerapp dapr enable \

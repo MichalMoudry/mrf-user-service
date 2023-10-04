@@ -19,14 +19,6 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Add Firebase config to app's general configurion
-        run: |
-          echo "[firebase.config]" >> ./src/config.toml
-          echo "type = ${{ secrets.FB_TYPE }}" >> ./src/config.toml
-          echo "private_key_id = ${{ secrets.FB_PRIV_KEY_ID }}" >> ./src/config.toml
-          echo "private_key = ${{ secrets.FB_PRIV_KEY }}" >> ./src/config.toml
-          echo "client_email = ${{ secrets.FB_CLIENT_EMAIL }}" >> ./src/config.toml
-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
@@ -62,10 +54,35 @@ jobs:
           find: "[subscription_id]"
           replace: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           regex: false
-          include: "**app_config.yml"
+          include: "**app_template.yml"
+
+      - name: Update app's template
+        env:
+          PRIVATE_KEY=${{ secrets.FB_PRIV_KEY }}
+        run: |
+          echo "        env:" >> ./.azure/app_template.yml
+          echo "          - name: FB_TYPE" >> ./.azure/app_template.yml
+          echo "            value: ${{ secrets.FB_TYPE }}" >> ./.azure/app_template.yml
+
+          echo "          - name: FB_PRIV_KEY_ID" >> ./.azure/app_template.yml
+          echo "            value: ${{ secrets.FB_PRIV_KEY_ID }}" >> ./.azure/app_template.yml
+
+          echo "          - name: FB_PRIV_KEY" >> ./.azure/app_template.yml
+          echo "            value: $PRIVATE_KEY" >> ./.azure/app_template.yml
+
+          echo "          - name: FB_CLIENT_EMAIL" >> ./.azure/app_template.yml
+          echo "            value: ${{ secrets.FB_CLIENT_EMAIL }}" >> ./.azure/app_template.yml
+
+          echo "          - name: FB_CLIENT_ID" >> ./.azure/app_template.yml
+          echo "            value: ${{ secrets.FB_CLIENT_ID }}" >> ./.azure/app_template.yml
+
+          echo "          - name: FB_CLIENT_CERT_URL" >> ./.azure/app_template.yml
+          echo "            value: ${{ secrets.FB_CLIENT_CERT_URL }}" >> ./.azure/app_template.yml
+          cat ./.azure/app_template.yml
 
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
+        if: false
         with:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
@@ -73,12 +90,11 @@ jobs:
           containerAppName: user-service
           targetPort: 8085
           ingress: external
-          yamlConfigPath: ./.azure/app_config.yml
-          environmentVariables:
-            TEST=TEMP
+          yamlConfigPath: ./.azure/app_template.yml
 
       - name: Enable dapr for a Container App
         uses: azure/CLI@v1
+        if: false
         with:
           inlineScript: |
             az containerapp dapr enable \

@@ -6,22 +6,11 @@ import (
 
 type Environment string
 
-type FirebaseConfig struct {
-	Type                string
-	PrivateKeyId        string
-	PrivateKey          string
-	ClientEmail         string
-	ClientId            string
-	AuthProviderCertUrl string
-	ClientCertUrl       string
-}
-
 // App's general configuration.
 type Config struct {
 	Port int
 	Environment
 	RunWithDapr bool
-	FirebaseConfig
 }
 
 // This function reads app's configuration from a config file.
@@ -35,14 +24,5 @@ func ReadCfgFromFile(path string) (Config, error) {
 		Port:        viper.GetInt("port"),
 		Environment: Environment(viper.GetString("environment")),
 		RunWithDapr: viper.GetBool("run_with_dapr"),
-		FirebaseConfig: FirebaseConfig{
-			Type:                viper.GetString("firebase.config.type"),
-			PrivateKeyId:        viper.GetString("firebase.config.private_key_id"),
-			PrivateKey:          viper.GetString("firebase.config.private_key"),
-			ClientEmail:         viper.GetString("firebase.config.client_email"),
-			ClientId:            viper.GetString("firebase.config.client_id"),
-			AuthProviderCertUrl: viper.GetString("firebase.config.auth_provider_cert_url"),
-			ClientCertUrl:       viper.GetString("firebase.config.client_cert_url"),
-		},
 	}, nil
 }
