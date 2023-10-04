@@ -79,7 +79,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         with:
           find: "[PRIVATE_KEY]"
-          replace: $PRIVATE_KEY
+          replace: '$PRIVATE_KEY'
           regex: false
           include: "**app_config.yml"
 
@@ -113,7 +113,7 @@ jobs:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
           containerAppEnvironment: microservice-ref-framework-env
-          containerAppName: user-service-3
+          containerAppName: user-service
           targetPort: 8085
           ingress: external
           yamlConfigPath: ./.azure/app_config.yml
