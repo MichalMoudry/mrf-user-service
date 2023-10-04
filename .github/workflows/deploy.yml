@@ -74,8 +74,9 @@ jobs:
       - name: Enable dapr for a Container App
         uses: azure/CLI@v1
         with:
-          azcliversion: 2.30.0
+          #azcliversion: 2.53.0
           inlineScript: |
+            az --version
             az containerapp dapr enable \
               -n user-service \
               -g ${{ secrets.AZURE_RESOURCE_GROUP }} \
