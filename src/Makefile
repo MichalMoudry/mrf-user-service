@@ -7,5 +7,5 @@ run_with_dapr:
 yml_create:
 	az containerapp create \
 		-g microservice-reference-framework \
-		-n test-service \
+		-n test-service-1 \
 		--yaml ../.azure/app_config.yml
