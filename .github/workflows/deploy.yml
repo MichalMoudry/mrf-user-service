@@ -58,7 +58,7 @@ jobs:
 
       - name: Update app's template
         env:
-          PRIVATE_KEY=${{ secrets.FB_PRIV_KEY }}
+          PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         run: |
           echo "        env:" >> ./.azure/app_template.yml
           echo "          - name: FB_TYPE" >> ./.azure/app_template.yml
