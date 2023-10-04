@@ -1,3 +1,3 @@
 port = 8085
 run_with_dapr = true
-environment = [dev]
+environment = "[dev]"

@@ -4,8 +4,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-type Environment string
-
 // App's general configuration.
 type Config struct {
 	Port int
