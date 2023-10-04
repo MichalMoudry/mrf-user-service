@@ -49,27 +49,72 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Update app config file
+      - name: Update subscription in app's config file
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "[subscription_id]"
           replace: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           regex: false
+          include: ./.azure/app_config.yml
+
+      - name: Update FB_TYPE env in app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "[FB_TYPE]"
+          replace: ${{ secrets.FB_TYPE }}
+          regex: false
+          include: ./.azure/app_config.yml
+
+      - name: Update FB_PRIV_KEY_ID env in app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "[FB_PRIV_KEY_ID]"
+          replace: ${{ secrets.FB_PRIV_KEY_ID }}
+          regex: false
+          include: ./.azure/app_config.yml
+
+      - name: Update PRIVATE_KEY env in app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "[PRIVATE_KEY]"
+          replace: ${{ secrets.PRIVATE_KEY }}
+          regex: false
+          include: ./.azure/app_config.yml
+
+      - name: Update FB_CLIENT_EMAIL env in app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "[FB_CLIENT_EMAIL]"
+          replace: ${{ secrets.FB_CLIENT_EMAIL }}
+          regex: false
+          include: ./.azure/app_config.yml
+
+      - name: Update FB_CLIENT_ID env in app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "[FB_CLIENT_ID]"
+          replace: ${{ secrets.FB_CLIENT_ID }}
+          regex: false
+          include: ./.azure/app_config.yml
+
+      - name: Update FB_CLIENT_CERT_URL env in app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "[FB_CLIENT_CERT_URL]"
+          replace: ${{ secrets.FB_CLIENT_CERT_URL }}
+          regex: false
+          include: ./.azure/app_config.yml
 
       - name: Deploy Container App
         uses: azure/container-apps-deploy-action@v1
-        env:
-          PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         with:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
           containerAppEnvironment: microservice-ref-framework-env
-          containerAppName: user-service-2
+          containerAppName: user-service-3
           targetPort: 8085
           ingress: external
           yamlConfigPath: ./.azure/app_config.yml
-          environmentVariables:
-            FB_TYPE=TESTVAL
           #  FB_TYPE="${{ secrets.FB_TYPE }}" FB_PRIV_KEY_ID="${{ secrets.FB_PRIV_KEY_ID }}" FB_PRIV_KEY='$PRIVATE_KEY' FB_CLIENT_EMAIL="${{ secrets.FB_CLIENT_EMAIL }}" FB_CLIENT_ID="${{ secrets.FB_CLIENT_ID }}" FB_CLIENT_CERT_URL="${{ secrets.FB_CLIENT_CERT_URL }}"
 
       - name: Enable dapr for a Container App
