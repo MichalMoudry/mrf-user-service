@@ -9,7 +9,6 @@ jobs:
     name: Push Docker image
     runs-on: ubuntu-latest
     environment: Azure
-    if: false
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -37,8 +36,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    #needs: [push_to_registery]
-    #environment: Azure
+    needs: [push_to_registery]
+    environment: Azure
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -72,7 +71,6 @@ jobs:
           yamlConfigPath: ./.azure/app_config.yml
 
       - name: Enable dapr for a Container App
-        if: false
         uses: azure/CLI@v1
         with:
           inlineScript: |
