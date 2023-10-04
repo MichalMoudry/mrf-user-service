@@ -22,7 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(cfg)
+	log.Printf("App is running in '%v' mode.\n", cfg.Environment)
 
 	// Firebase init
 	firebaseCredentials, err := config.CreateFirebaseCredentials()

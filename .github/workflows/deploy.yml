@@ -57,8 +57,9 @@ jobs:
           regex: false
           include: "**app_config.yml"
 
-      - name: Update general config file
+      - name: Add Firebase config to app's general configurion
         run: |
+          echo "[firebase.config]" >> ./src/config.toml
           echo "type = ${{ secrets.FB_TYPE }}" >> ./src/config.toml
           echo "private_key_id = ${{ secrets.FB_PRIV_KEY_ID }}" >> ./src/config.toml
           echo "private_key = ${{ secrets.FB_PRIV_KEY }}" >> ./src/config.toml

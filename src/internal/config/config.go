@@ -4,6 +4,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+type Environment string
+
 type FirebaseConfig struct {
 	Type                string
 	PrivateKeyId        string
@@ -14,8 +16,10 @@ type FirebaseConfig struct {
 	ClientCertUrl       string
 }
 
+// App's general configuration.
 type Config struct {
-	Port        int
+	Port int
+	Environment
 	RunWithDapr bool
 	FirebaseConfig
 }
@@ -29,6 +33,7 @@ func ReadCfgFromFile(path string) (Config, error) {
 
 	return Config{
 		Port:        viper.GetInt("port"),
+		Environment: Environment(viper.GetString("environment")),
 		RunWithDapr: viper.GetBool("run_with_dapr"),
 		FirebaseConfig: FirebaseConfig{
 			Type:                viper.GetString("firebase.config.type"),

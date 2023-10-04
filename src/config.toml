@@ -1,4 +1,3 @@
 port = 8085
 run_with_dapr = false
-
-[firebase.config]
+environment = [dev]
