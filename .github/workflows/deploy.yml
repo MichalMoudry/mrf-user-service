@@ -74,14 +74,10 @@ jobs:
           include: "**app_config.yml"
 
       - name: Update PRIVATE_KEY env in app's config
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         env:
           PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         with:
-          find: "[PRIVATE_KEY]"
-          replace: "$PRIVATE_KEY"
-          regex: false
-          include: "**app_config.yml"
 
       - name: Update FB_CLIENT_EMAIL env in app's config
         uses: jacobtomlinson/gha-find-replace@v3
