@@ -62,7 +62,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.FB_PRIV_KEY }}
         with:
           imageToDeploy: docker.io/michalmoudry/user-service:latest
-          resourceGroup: microservice-reference-framework
+          resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
           containerAppEnvironment: microservice-ref-framework-env
           containerAppName: user-service
           targetPort: 8085
@@ -78,7 +78,7 @@ jobs:
           inlineScript: |
             az containerapp dapr enable \
               -n user-service \
-              -g microservice-reference-framework \
+              -g ${{ secrets.AZURE_RESOURCE_GROUP }} \
               --dapr-app-id userservice \
               --dapr-app-protocol http \
               --dapr-app-port 8085
