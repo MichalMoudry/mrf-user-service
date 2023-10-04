@@ -72,6 +72,7 @@ jobs:
           yamlConfigPath: ./.azure/app_config.yml
 
       - name: Enable dapr for a Container App
+        if: false
         uses: azure/CLI@v1
         with:
           inlineScript: |
