@@ -25,6 +25,12 @@ jobs:
         with:
           images: michalmoudry/user-service
 
+      - name: Edit app's config
+        uses: jacobtomlinson/gha-find-replace@v3
+        find: "[dev]"
+        replace: "[prod]"
+        include: "**config.toml"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:

@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"os"
+	"strings"
 
 	firebase "firebase.google.com/go/v4"
 )
@@ -35,7 +36,7 @@ func CreateFirebaseCredentials() ([]byte, error) {
 		Type:                os.Getenv("FB_TYPE"),
 		ProjectId:           "ocr-microservice-project",
 		PrivateKeyId:        os.Getenv("FB_PRIV_KEY_ID"),
-		PrivateKey:          os.Getenv("FB_PRIV_KEY"),
+		PrivateKey:          strings.ReplaceAll(os.Getenv("FB_PRIV_KEY"), "\\n", "\n"),
 		ClientEmail:         os.Getenv("FB_CLIENT_EMAIL"),
 		ClientId:            os.Getenv("FB_CLIENT_ID"),
 		AuthUri:             "https://accounts.google.com/o/oauth2/auth",
