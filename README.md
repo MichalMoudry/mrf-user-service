@@ -11,7 +11,7 @@ A repository with a service for managing users. This repository is part of [Micr
 
 ## Project structure
 - **/src** - Folder with all the source/test code related to this service.
-    - /cmd
+    - /cmd - Folder with service's entrypoints.
     - /internal
         - /transport
         - /service
