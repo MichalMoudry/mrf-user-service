@@ -29,6 +29,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         find: "[dev]"
         replace: "[prod]"
+        regex: false
         include: "**config.toml"
 
       - name: Build and push Docker image
