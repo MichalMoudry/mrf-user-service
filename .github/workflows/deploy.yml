@@ -27,10 +27,11 @@ jobs:
 
       - name: Edit app's config
         uses: jacobtomlinson/gha-find-replace@v3
-        find: "[dev]"
-        replace: "[prod]"
-        regex: false
-        include: "**config.toml"
+        with:
+          find: "[dev]"
+          replace: "[prod]"
+          regex: false
+          include: "**config.toml"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
