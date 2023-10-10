@@ -42,5 +42,13 @@ classDiagram
 **Note**: This is a stateless service, so there is no persistance layer/database.
 
 ## Getting started
+There are two way to run this service, running it locally or deploying it to the cloud.
+### Running locally
+
+### Deploy to Azure
 
 ## Used technologies
+- Dapr
+- chi
+- Docker
+- PostgreSQL
