@@ -25,7 +25,7 @@ func NewUserService(dapr dapr.Client, fbAuth *auth.Client) UserService {
 
 // Method for deleting a user in the system.
 func (srvc UserService) DeleteUser(ctx context.Context, userId string) error {
-	log.Printf("Try to delete user with ID: %v", userId)
+	log.Printf("Try to delete user with ID: %v\n", userId)
 	err := srvc.FirebaseAuth.DeleteUser(ctx, userId)
 	if err != nil {
 		return err
