@@ -36,5 +36,5 @@ func parseBearerToken(h http.Header) string {
 	if h == nil {
 		return ""
 	}
-	return strings.TrimPrefix(h.Get("Authorization"), "Bearer ")
+	return strings.TrimPrefix(h.Get("Authorization"), "BEARER ")
 }
